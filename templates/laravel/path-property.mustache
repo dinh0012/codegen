@@ -1,0 +1,25 @@
+{{^optional}}
+        if(!isset($request->{{name}})){
+            $errors['{{&name}}'][] = 'required';
+        }
+{{/optional}}
+{{!referenceがある場合は、definitionでチェック}}
+{{#isRef}}
+        if(isset($request->{{name}})){
+            $errors['{{name}}']['attrs'] =
+                DefinitionFactory::factory('{{target}}')->validate($request->{{name}});
+        }
+{{/isRef}}
+{{!referenceがない場合は、直接型を比較}}
+{{^isRef}}
+        if(isset($request->{{name}}) && codegenGetType($request->{{name}}) !== '{{&tsType}}'){
+            $errors['{{&name}}'][] = 'use {{&tsType}}';
+        }
+    {{!パラメタの中で何らかのdefinitionを呼び出している場合は、そのdefinitionのチェックを入れる}}
+    {{#elementType.target}}
+        if(isset($request->{{name}})){
+            $errors['{{name}}']['attrs'] =
+                DefinitionFactory::factory('{{elementType.target}}')->validate($request->{{name}});
+        }
+    {{/elementType.target}}
+{{/isRef}}

@@ -1,0 +1,9 @@
+
+    // {{&summary}}
+    public static function {{&methodName}}($request) {
+        $errors = [];
+        {{#parameters}}
+        {{> parameter}}
+        {{/parameters}}
+        return $errors;
+    }

@@ -1,0 +1,4191 @@
+{
+  "basePath": "/rc/",
+  "definitions": {
+    "Department": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "created_time": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent_id": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "integer"
+        },
+        "updated_time": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Dir": {
+      "properties": {
+        "created_time": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "is_published": {
+          "type": "integer"
+        },
+        "parent_id": {
+          "type": "integer"
+        },
+        "updated_by": {
+          "type": "integer"
+        },
+        "updated_time": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "File": {
+      "properties": {
+        "can_download": {
+          "type": "integer"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "created_time": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dir_id": {
+          "type": "integer"
+        },
+        "dir_name": {
+          "type": "string"
+        },
+        "file_size": {
+          "type": "integer"
+        },
+        "file_type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "page_count": {
+          "type": "integer"
+        },
+        "updated_by": {
+          "type": "string"
+        },
+        "updated_time": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Profile": {
+      "department_id": {
+        "type": "integer"
+      },
+      "email": {
+        "type": "string"
+      },
+      "fullname": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer"
+      },
+      "lastLogin": {
+        "type": "string"
+      },
+      "username": {
+        "type": "string"
+      }
+    },
+    "Topic": {
+      "properties": {
+        "created_time": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "team_id": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "User": {
+      "properties": {
+        "department_id": {
+          "type": "integer"
+        },
+        "department_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "host": "api.vnext-erp.online",
+  "info": {
+    "contact": {
+      "email": "thangtv1@vnext.com.vn"
+    },
+    "description": "Erp - Doc Share's API",
+    "title": "Talent-Pool",
+    "version": "v1"
+  },
+  "paths": {
+    "/doc/files/public": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get file all file public",
+        "tags": [
+          "get file all file public"
+        ]
+      }
+    },
+    "/doc/files/{fileId}/upload": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "fileId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "fileId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "filename",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "filename",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "base64_content",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "base64_content",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "upload file version",
+        "tags": [
+          "upload file version"
+        ]
+      }
+    },
+    "/doc/files/{fileId}/versions": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "fileId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "fileId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get all  file version",
+        "tags": [
+          "get all file version"
+        ]
+      }
+    },
+    "/doc/files/{fileId}/versions/{verId}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "fileId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "fileId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "verId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "verId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "delete  file version",
+        "tags": [
+          "delete file version"
+        ]
+      }
+    },
+    "/doc/files/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "fileId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "delete file",
+        "tags": [
+          "delete file"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "fileId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Name",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "name",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Published",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "is_published",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Download",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "can_download",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Description",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": 255,
+            "min": null,
+            "minLength": "0",
+            "name": "description",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "update file",
+        "tags": [
+          "update file"
+        ]
+      }
+    },
+    "/doc/files/{id}/view": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "fileId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "page",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "page",
+            "pattern": null,
+            "required": false,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "onlyFirstPage",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "onlyFirstPage",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "view file png",
+        "tags": [
+          "view file png"
+        ]
+      }
+    },
+    "/doc/folders": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Sort",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "sort",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get root folders",
+        "tags": [
+          "get root folders"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "dirName",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "dirName",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "parentId",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "parentId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "create dir",
+        "tags": [
+          "create dir"
+        ]
+      }
+    },
+    "/doc/folders/{dirId}/upload": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "dirId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "dirId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "filename",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "filename",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "base64_content",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "base64_content",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "upload file",
+        "tags": [
+          "upload file"
+        ]
+      }
+    },
+    "/doc/folders/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "delete folder",
+        "tags": [
+          "delete folder"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for dir",
+            "schema": {
+              "$ref": "#/definitions/dir"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "detail folder",
+        "tags": [
+          "detail folder"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "dirName",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "dirName",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "is_published",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "is_published",
+            "pattern": null,
+            "required": false,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "update folder",
+        "tags": [
+          "update folder"
+        ]
+      }
+    },
+    "/doc/folders/{id}/dir": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Sort",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "sort",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get dir private",
+        "tags": [
+          "get dir private"
+        ]
+      }
+    },
+    "/doc/folders/{id}/dir/parent": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get dir parent",
+        "tags": [
+          "get dir parent"
+        ]
+      }
+    },
+    "/doc/folders/{id}/file": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Dir ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Sort",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "sort",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get file private by dir",
+        "tags": [
+          "get file  private by dir "
+        ]
+      }
+    },
+    "/doc/public/folders/{id}/file": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Dir Root ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Sort",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "sort",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from file",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/file"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get file  public by dir root",
+        "tags": [
+          "get file  public by dir root"
+        ]
+      }
+    },
+    "/doc/root-folders": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get all root folder",
+        "tags": [
+          "get all root folder"
+        ]
+      }
+    },
+    "/faq/cats": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [ ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from cat",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/cat"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get cat public",
+        "tags": [
+          "get cat public"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "name",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "name",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "description",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "description",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from cat",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/cat"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "create new cat",
+        "tags": [
+          "create new cat"
+        ]
+      }
+    },
+    "/faq/cats/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from cat",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/cat"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "delete faq",
+        "tags": [
+          "delete faq"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from cat",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/cat"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get detail faq",
+        "tags": [
+          "get detail faq"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "name",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "name",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "description",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "description",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from cat",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/cat"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "update cat",
+        "tags": [
+          "update cat"
+        ]
+      }
+    },
+    "/faq/cats/{id}/items": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from faq",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/faq"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get faq public",
+        "tags": [
+          "get faq public"
+        ]
+      }
+    },
+    "/faq/items": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Cat_id",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "cat_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Question",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "question",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Answer",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "answer",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Sorder",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "sorder",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Status",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "status",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from faq",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/faq"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "create faq public",
+        "tags": [
+          "create faq public"
+        ]
+      }
+    },
+    "/faq/items/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from faq",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/faq"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "delete faq",
+        "tags": [
+          "delete faq"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from faq",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/faq"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get faq",
+        "tags": [
+          "get faq"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Cat_id",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "cat_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Question",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "question",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Answer",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "answer",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Sorder",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "sorder",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Status",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "status",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from faq",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/faq"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "edit faq public",
+        "tags": [
+          "edit faq public"
+        ]
+      }
+    },
+    "/faqs": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from faq",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/faq"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get all faq public",
+        "tags": [
+          "get all faq public"
+        ]
+      }
+    },
+    "/hrm/user/auto-suggest": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Query",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "q",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for user",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "User Auto Suggest",
+        "tags": [
+          "User Suggest"
+        ]
+      }
+    },
+    "/layout/menu": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [ ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": [ ],
+        "summary": "Get Menu",
+        "tags": [
+          "Get Menu"
+        ]
+      }
+    },
+    "/member/logout": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Logout",
+        "parameters": [ ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": { },
+        "summary": "Logout",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/news": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for user",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "get Active news",
+        "tags": [
+          "get Active news"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Title",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": 255,
+            "min": null,
+            "minLength": null,
+            "name": "title",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Description",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "description",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Thumbnail",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "thumbnail",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Active",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "is_active",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for user",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "create news",
+        "tags": [
+          "create news"
+        ]
+      }
+    },
+    "/setting/drive/root": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Name",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "name",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "create root drive",
+        "tags": [
+          "create root drive"
+        ]
+      }
+    },
+    "/setting/drive/root/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "delete root drive",
+        "tags": [
+          "delete root drive"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Name",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "name",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "edit root drive",
+        "tags": [
+          "edit root drive"
+        ]
+      }
+    },
+    "/setting/folders/{dirId}/user": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "dirId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "Get folder's owners",
+        "tags": [
+          "Get folder's owners"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "dirId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "UserID",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "user_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "Assign user to folder",
+        "tags": [
+          "Assign user to folder"
+        ]
+      }
+    },
+    "/setting/folders/{dirId}/user/{userId}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "dirId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "dirId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "userId",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "userId",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from dir",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/dir"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "Get folder's owners",
+        "tags": [
+          "Get folder's owners"
+        ]
+      }
+    },
+    "/team-members": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Team",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "team_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "member",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "member_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from team",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/team"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "create team public",
+        "tags": [
+          "create team public"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Team",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "team_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "member",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "member_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from team",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/team"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "add member to team",
+        "tags": [
+          "add member"
+        ]
+      }
+    },
+    "/teams": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [ ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from team",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/team"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "list team",
+        "tags": [
+          "list team"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Name",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "name",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Description",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "description",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Lead_id",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "lead_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Email_contact",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "email_contact",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from team",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/team"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "create team public",
+        "tags": [
+          "create team public"
+        ]
+      }
+    },
+    "/teams/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from team",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/team"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "delete team",
+        "tags": [
+          "delete team"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from team",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/team"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get team",
+        "tags": [
+          "get team"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Name",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "name",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Description",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "description",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Lead_id",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "lead_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Email_contact",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "email_contact",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from team",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/team"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "edit team public",
+        "tags": [
+          "edit team public"
+        ]
+      }
+    },
+    "/teams/{id}/topic": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "ID",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from team",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/team"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get team",
+        "tags": [
+          "get team"
+        ]
+      }
+    },
+    "/ticket": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Title",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "title",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "To tem",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "to_team_id",
+            "pattern": null,
+            "required": true,
+            "type": "number",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Protioty",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "protioty",
+            "pattern": null,
+            "required": false,
+            "type": "number",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Topic",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "topic_id",
+            "pattern": null,
+            "required": false,
+            "type": "number",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Attachments",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "attachments",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Content",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "body",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for ticket",
+            "schema": {
+              "$ref": "#/definitions/ticket"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "create ticket",
+        "tags": [
+          "create ticket"
+        ]
+      }
+    },
+    "/ticket/me": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "title",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "title",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Status",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "status",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "From",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "from",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "To",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "to",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Page",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "page",
+            "pattern": null,
+            "required": false,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Page size",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "pagesize",
+            "pattern": null,
+            "required": false,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Sort field",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "sort",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from ticket",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/ticket"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get my ticket",
+        "tags": [
+          "get my ticket"
+        ]
+      }
+    },
+    "/ticket/owner": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [ ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from ticket",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/ticket"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get ticket owner",
+        "tags": [
+          "get ticket owner"
+        ]
+      }
+    },
+    "/ticket/{id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Id ticket",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "number",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for ticket",
+            "schema": {
+              "$ref": "#/definitions/ticket"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "get ticket detail",
+        "tags": [
+          "get ticket detail"
+        ]
+      }
+    },
+    "/ticket/{id}/threads": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Id ticket",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "number",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from ticket",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/ticket"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get threads ticket",
+        "tags": [
+          "get threads ticket"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Id ticket",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "number",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Assign",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "assign_id",
+            "pattern": null,
+            "required": false,
+            "type": "number",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Status",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "status",
+            "pattern": null,
+            "required": false,
+            "type": "number",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Type",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "type",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Attachments",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "attachments",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Content",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "body",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for ticket",
+            "schema": {
+              "$ref": "#/definitions/ticket"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "add threads ticket",
+        "tags": [
+          "add threads ticket"
+        ]
+      }
+    },
+    "/topics": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [ ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from topic",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/tk_topic"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get list topic",
+        "tags": [
+          "get list topic"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Name",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "name",
+            "pattern": null,
+            "required": true,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Team",
+            "format": null,
+            "in": "body",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "team_id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for topic",
+            "schema": {
+              "$ref": "#/definitions/tk_topic"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "create a topic",
+        "tags": [
+          "create a topic"
+        ]
+      }
+    },
+    "/topics/{id}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Topic",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for topic",
+            "schema": {
+              "$ref": "#/definitions/tk_topic"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "delete a topic",
+        "tags": [
+          "delete a topic"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "Topic",
+            "format": null,
+            "in": "path",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "id",
+            "pattern": null,
+            "required": true,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for topic",
+            "schema": {
+              "$ref": "#/definitions/tk_topic"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "get a topic",
+        "tags": [
+          "get a topic"
+        ]
+      }
+    },
+    "/tsm/timesheet/event/me": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "description": "from",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": 255,
+            "min": null,
+            "minLength": null,
+            "name": "from",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "to",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": 255,
+            "min": null,
+            "minLength": null,
+            "name": "to",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "month",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "month",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "year",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "year",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Page size",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "pageSize",
+            "pattern": null,
+            "required": false,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Page",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "page",
+            "pattern": null,
+            "required": false,
+            "type": "integer",
+            "x-patternErrorMessage": null
+          },
+          {
+            "description": "Sort",
+            "format": null,
+            "in": "query",
+            "items": null,
+            "max": null,
+            "maxLength": null,
+            "min": null,
+            "minLength": null,
+            "name": "sort",
+            "pattern": null,
+            "required": false,
+            "type": "string",
+            "x-patternErrorMessage": null
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "list from user",
+            "schema": {
+              "description": "you can't set field parameter",
+              "items": {
+                "$ref": "#/definitions/user"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          }
+        },
+        "summary": "get me attendances",
+        "tags": [
+          "get me attendances"
+        ]
+      }
+    },
+    "/user/info": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "parameters": [ ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "one_data for user",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "Get infor me",
+        "tags": [
+          "infor me"
+        ]
+      }
+    },
+    "/user/me": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Get user profile",
+        "parameters": [ ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "data for user profile",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "401": {
+            "description": "unauthorize",
+            "schema": {
+              "code": 0,
+              "message": "You are not allowed to access this page",
+              "name": "Unauthorized",
+              "status": 401
+            }
+          },
+          "403": {
+            "description": "User need admin role",
+            "schema": {
+              "code": 403,
+              "message": "some message"
+            }
+          }
+        },
+        "summary": "Get user profile",
+        "tags": [
+          "users"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Doc Share",
+      "name": "Doc Share"
+    }
+  ]
+}

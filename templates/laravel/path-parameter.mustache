@@ -1,0 +1,81 @@
+{{^isBodyParameter}}
+    {{#required}}
+        if(!isset($request->{{name}})){
+            $error = [
+                '{{name}}' => '{{name}} is required'
+            ];
+            throw new \Exception(json_encode($error), 422);
+        }
+    {{/required}}
+    {{#notEmpty}}
+        $name = trim($request->{{name}});
+        $name = str_replace('　', '', $name);
+        if (empty($name) || mb_strlen($name) <= 0) {
+            $error = [
+                '{{name}}' => '{{notEmpty.message}}'
+            ];
+            throw new \Exception(json_encode($error), 422);
+        }
+    {{/notEmpty}}
+    {{#maxLength}}
+        if(mb_strlen($request->{{name}}, 'UTF-8') > {{maxLength.value}}){
+            $error = [
+                '{{name}}' => '{{maxLength.message}}'
+            ];
+            throw new \Exception(json_encode($error), 422);
+        }
+    {{/maxLength}}
+    {{#unique}}
+        if({{unique.functionName}}($request->{{name}})) {
+            $error = [
+                '{{name}}' => '{{unique.message}}'
+            ];
+            throw new \Exception(json_encode($error), 422);
+        }
+    {{/unique}}
+    {{#type}}
+        if(isset($request->{{name}}) && codegenGetType($request->{{name}}) !== '{{&type}}'){
+            $error = [
+                '{{name}}' => '{{name}} must be {{type}} : ' + codegenGetType($request->{{name}})
+            ];
+            throw new \Exception(json_encode($error), 422);
+        }
+    {{/type}}
+
+    {{#items}}
+        if(isset($request->{{name}}) && self::invalid_array($request->{{name}}, '{{&type}}')){
+            $error = [
+                '{{name}}' => '{{name}} items must be {{type}}'
+            ];
+            throw new \Exception(json_encode($error), 422);
+        }
+    {{/items}}
+
+{{/isBodyParameter}}
+{{!bodyパラメタの中のものはjsonを分解してチェック}}
+{{#isBodyParameter}}
+    {{!referenceがある場合は、definitionでチェック}}
+    {{#isRef}}
+        if(isset($request->{{name}})){
+            $errors['{{name}}']['attrs'] =
+                DefinitionFactory::factory('{{target}}')->validate($request->{{name}});
+        }
+    {{/isRef}}
+    {{!referenceがない場合は、直接型を比較}}
+    {{^isRef}}
+        {{#tsType}}
+            {{#tsType.isRef}}
+        if(isset($request->{{name}})){
+            $errors['{{name}}']['attrs'] =
+                DefinitionFactory::factory('{{tsType.target}}')->validate($request->{{name}});
+        }
+        {{/tsType.isRef}}
+        {{!referenceがない場合は、object or array型(JSONデータのため)}}
+        {{^tsType.isRef}}
+            {{#tsType.properties}}
+                {{> property}}
+            {{/tsType.properties}}
+        {{/tsType.isRef}}
+        {{/tsType}}
+    {{/isRef}}
+{{/isBodyParameter}}

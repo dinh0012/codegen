@@ -1,0 +1,24 @@
+{
+    "basedir": "laravel",
+    "gen": [
+        {
+            "class": "templates/laravel/route-class.mustache",
+            "method": "templates/laravel/route-method.mustache",
+            "filepath": "routes/web.php"
+        },
+        {
+            "class": "templates/laravel/definition-wrapper.mustache",
+            "definition": "templates/laravel/definition-class.mustache",
+            "property": "templates/laravel/definition-property.mustache",
+            "method": "only exist avoid errors",
+            "filepath": "app/DefinitionFactory.php"
+        },
+        {
+            "class": "templates/laravel/path-class.mustache",
+            "method": "templates/laravel/path-method.mustache",
+            "parameter": "templates/laravel/path-parameter.mustache",
+            "property": "templates/laravel/path-property.mustache",
+            "filepath": "app/RequestChecker.php"
+        }
+    ]
+}
