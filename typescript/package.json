@@ -1,0 +1,43 @@
+{
+  "name": "codegen-typescript",
+  "version": "1.0.0",
+  "description": " codegen-typescript",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "laravel": "ts-node-dev --respawn --transpileOnly ./src/output.ts laravel",
+    "output": "ts-node-dev --respawn --transpileOnly ./src/output.ts",
+    "tsc": "tsc"
+  },
+  "author": "Dinhnv",
+  "devDependencies": {
+    "@types/mustache": "^0.8.32",
+    "@types/node": "^12.12.14",
+    "final-fs": "^1.6.1",
+    "grunt": "^1.0.4",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-jsonlint": "^2.0.0",
+    "grunt-vows": "^0.4.2",
+    "matchdep": "^2.0.0",
+    "q": "^1.5.1",
+    "request": "^2.88.0",
+    "superagent": "^5.1.2",
+    "tmp": "^0.1.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tslint": "^5.20.1",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.7.3",
+    "vows": "^0.8.3"
+  },
+  "dependencies": {
+    "commander": "^4.0.1",
+    "js-beautify": "^1.10.2",
+    "js-yaml": "^3.13.1",
+    "jshint": "^2.10.3",
+    "lodash": "^4.17.15",
+    "mustache": "^3.1.0",
+    "update-notifier": "^3.0.1"
+  }
+}

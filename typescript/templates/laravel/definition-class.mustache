@@ -1,0 +1,12 @@
+
+class {{&name}}Validator {
+    public function check($data) {
+        $errors = [];
+        {{#tsType}}
+        {{#properties}}
+        {{> property}}
+        {{/properties}}
+        {{/tsType}}
+        return $errors;
+    }
+}

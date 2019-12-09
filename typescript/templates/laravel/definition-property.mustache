@@ -1,0 +1,25 @@
+    {{^optional}}
+        if(!isset($data['{{&name}}'])){
+            $errors['{{&name}}'][] = 'required';
+        }
+    {{/optional}}
+    {{!referenceがある場合は、definitionでチェック}}
+    {{#isRef}}
+        if(isset($data['{{name}}'])){
+            $errors['{{name}}']['attrs'] =
+                DefinitionFactory::factory('{{target}}')->validate($data['{{name}}']);
+        }
+    {{/isRef}}
+    {{!referenceがない場合は、直接型を比較}}
+    {{^isRef}}
+        if(isset($data['{{name}}']) && codegenGetType($data['{{name}}']) !== '{{&tsType}}'){
+            $errors['{{&name}}'][] = 'use {{&tsType}}';
+        }
+        {{!パラメタの中で何らかのdefinitionを呼び出している場合は、そのdefinitionのチェックを入れる}}
+        {{#elementType.target}}
+        if(isset($data['{{name}}'])){
+            $errors['{{name}}']['attrs'] =
+            DefinitionFactory::factory('{{elementType.target}}')->validate($data['{{name}}']);
+        }
+        {{/elementType.target}}
+    {{/isRef}}
