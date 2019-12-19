@@ -5,6 +5,7 @@ import { JSHINT as lint } from 'jshint';
 import * as _ from 'lodash';
 import * as ts from './typescript';
 import { Data, Method, Option } from '../type';
+import { formatPHP } from "../formatCode/format";
 
 const normalizeName = (id) => {
   return id.replace(/\.|\-|\{|\}|\s/g, '_');
@@ -404,6 +405,14 @@ const getCode = (opts: Option, type) => {
   }
   if (opts.beautify === undefined || opts.beautify === true) {
     return beautify(source, { indent_size: 4, max_preserve_newlines: 2 });
+  }
+
+  const {format} = opts;
+  switch (format) {
+    case 'php':
+      return formatPHP(source)
+    default:
+      break;
   }
   return source;
 

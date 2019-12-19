@@ -6,44 +6,50 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
         return $router->app->version();
     });
 
-        // Add a new pet to the store
-        $router->post('/pet', 'PetController@addPet');
-        // Update an existing pet
-        $router->put('/pet', 'PetController@updatePet');
-        // Multiple status values can be provided with comma separated strings
-        $router->get('/pet/findByStatus', 'PetController@findPetsByStatus');
-        // Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing.
-        $router->get('/pet/findByTags', 'PetController@findPetsByTags');
-        // Returns a single pet
-        $router->get('/pet/{petId}', 'PetController@getPetById');
-        // Updates a pet in the store with form data
-        $router->post('/pet/{petId}', 'PetController@updatePetWithForm');
-        // Deletes a pet
-        $router->delete('/pet/{petId}', 'PetController@deletePet');
-        // uploads an image
-        $router->post('/pet/{petId}/uploadImage', 'PetController@uploadFile');
-        // Returns a map of status codes to quantities
-        $router->get('/store/inventory', 'StoreController@getInventory');
-        // Place an order for a pet
-        $router->post('/store/order', 'StoreController@placeOrder');
-        // For valid response try integer IDs with value &gt;&#x3D; 1 and &lt;&#x3D; 10.         Other values will generated exceptions
-        $router->get('/store/order/{orderId}', 'StoreController@getOrderById');
-        // For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors
-        $router->delete('/store/order/{orderId}', 'StoreController@deleteOrder');
-        // This can only be done by the logged in user.
-        $router->post('/user', 'UserController@createUser');
-        // Creates list of users with given input array
-        $router->post('/user/createWithArray', 'UserController@createUsersWithArrayInput');
-        // Creates list of users with given input array
-        $router->post('/user/createWithList', 'UserController@createUsersWithListInput');
-        // Logs user into the system
-        $router->get('/user/login', 'UserController@loginUser');
-        // Logs out current logged in user session
-        $router->get('/user/logout', 'UserController@logoutUser');
-        // Get user by user name
-        $router->get('/user/{username}', 'UserController@getUserByName');
-        // This can only be done by the logged in user.
-        $router->put('/user/{username}', 'UserController@updateUser');
-        // This can only be done by the logged in user.
-        $router->delete('/user/{username}', 'UserController@deleteUser');
+    // Add a new pet to the store
+    $router->post('/pet', 'PetController@addPet');
+    // Update an existing pet
+    $router->put('/pet', 'PetController@updatePet');
+    // Multiple status values can be provided with comma separated strings
+    $router->get('/pet/findByStatus', 'PetController@findPetsByStatus');
+    // Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing.
+    $router->get('/pet/findByTags', 'PetController@findPetsByTags');
+    // Returns a single pet
+    $router->get('/pet/{petId}', 'PetController@getPetById');
+    // Updates a pet in the store with form data
+    $router->post('/pet/{petId}', 'PetController@updatePetWithForm');
+    // Deletes a pet
+    $router->delete('/pet/{petId}', 'PetController@deletePet');
+    // uploads an image
+    $router->post('/pet/{petId}/uploadImage', 'PetController@uploadFile');
+    // Returns a map of status codes to quantities
+    $router->get('/store/inventory', 'StoreController@getInventory');
+    // Place an order for a pet
+    $router->post('/store/order', 'StoreController@placeOrder');
+    // For valid response try integer IDs with value &gt;&#x3D; 1 and &lt;&#x3D; 10.         Other values will generated exceptions
+    $router->get('/store/order/{orderId}', 'StoreController@getOrderById');
+    // For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors
+    $router->delete('/store/order/{orderId}', 'StoreController@deleteOrder');
+    // This can only be done by the logged in user.
+    $router->post('/user', 'UserController@createUser');
+    // Creates list of users with given input array
+    $router->post(
+        '/user/createWithArray',
+        'UserController@createUsersWithArrayInput'
+    );
+    // Creates list of users with given input array
+    $router->post(
+        '/user/createWithList',
+        'UserController@createUsersWithListInput'
+    );
+    // Logs user into the system
+    $router->get('/user/login', 'UserController@loginUser');
+    // Logs out current logged in user session
+    $router->get('/user/logout', 'UserController@logoutUser');
+    // Get user by user name
+    $router->get('/user/{username}', 'UserController@getUserByName');
+    // This can only be done by the logged in user.
+    $router->put('/user/{username}', 'UserController@updateUser');
+    // This can only be done by the logged in user.
+    $router->delete('/user/{username}', 'UserController@deleteUser');
 });

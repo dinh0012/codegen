@@ -11,6 +11,7 @@ export type Option = {
     mustache?: boolean
     esnext?: boolean
     beautify?: boolean
+    format?: string
 }
 export type Header = {
     name: string[] | string

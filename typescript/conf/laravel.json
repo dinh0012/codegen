@@ -1,5 +1,6 @@
 {
     "basedir": "laravel",
+    "format": "php",
     "gen": [
         {
             "class": "templates/laravel/route-class.mustache",

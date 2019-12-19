@@ -19,11 +19,12 @@ const outputDir = typeCodeConf.basedir + '/';
 const file = getPath(`${typeCode}.json`);
 const swagger = JSON.parse(fs.readFileSync(file, 'UTF-8'));
 
-const outputFile = (swagger, template, filepath) => {
+const outputFile = (swagger, template, filepath, format = '') => {
     const source = CodeGen.getCustomCode({
         swagger,
         lint: false,
         beautify: false,
+        format: format,
         template
     });
     const outputPath = outputDir + filepath;
@@ -50,6 +51,7 @@ typeCodeConf.gen.map((part) => {
     outputFile(
         swagger,
         template,
-        part.filepath
+        part.filepath,
+        typeCodeConf.format,
     );
 })

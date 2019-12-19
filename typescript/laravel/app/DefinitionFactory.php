@@ -19,16 +19,15 @@ class DefinitionFactory
      */
     public static function factory($type)
     {
-        $adapter = sprintf("\App\%sValidator", $type);
+        $adapter = sprintf('\App\%sValidator', $type);
         if (!class_exists($adapter)) {
             throw new \Exception('Unsupported Adapter.');
         }
         return new self(new $adapter());
     }
 
-
-
-    public function validate($data) {
+    public function validate($data)
+    {
         $validated = $this->adapter->check($data);
 
         if ($this->anyValidateError($validated)) {
@@ -38,7 +37,8 @@ class DefinitionFactory
     }
 
     // check validated value
-    private function anyValidateError($validated) {
+    private function anyValidateError($validated)
+    {
         if (empty($validated)) {
             return false;
         }
@@ -55,138 +55,212 @@ class DefinitionFactory
     }
 }
 
+class OrderValidator
+{
+    public function check($data)
+    {
+        $errors = [];
+        if (isset($data['id']) && codegenGetType($data['id']) !== 'number') {
+            $errors['id'][] = 'use number';
+        }
+        if (
+            isset($data['petId']) &&
+            codegenGetType($data['petId']) !== 'number'
+        ) {
+            $errors['petId'][] = 'use number';
+        }
+        if (
+            isset($data['quantity']) &&
+            codegenGetType($data['quantity']) !== 'number'
+        ) {
+            $errors['quantity'][] = 'use number';
+        }
+        if (
+            isset($data['shipDate']) &&
+            codegenGetType($data['shipDate']) !== 'string'
+        ) {
+            $errors['shipDate'][] = 'use string';
+        }
+        if (
+            isset($data['status']) &&
+            codegenGetType($data['status']) !==
+                '"placed" | "approved" | "delivered"'
+        ) {
+            $errors['status'][] = 'use "placed" | "approved" | "delivered"';
+        }
+        if (
+            isset($data['complete']) &&
+            codegenGetType($data['complete']) !== 'boolean'
+        ) {
+            $errors['complete'][] = 'use boolean';
+        }
+        return $errors;
+    }
+}
 
-  
-  class OrderValidator {
-      public function check($data) {
-          $errors = [];
-                  if(isset($data['id']) && codegenGetType($data['id']) !== 'number'){
-                      $errors['id'][] = 'use number';
-                  }
-                  if(isset($data['petId']) && codegenGetType($data['petId']) !== 'number'){
-                      $errors['petId'][] = 'use number';
-                  }
-                  if(isset($data['quantity']) && codegenGetType($data['quantity']) !== 'number'){
-                      $errors['quantity'][] = 'use number';
-                  }
-                  if(isset($data['shipDate']) && codegenGetType($data['shipDate']) !== 'string'){
-                      $errors['shipDate'][] = 'use string';
-                  }
-                  if(isset($data['status']) && codegenGetType($data['status']) !== '"placed" | "approved" | "delivered"'){
-                      $errors['status'][] = 'use "placed" | "approved" | "delivered"';
-                  }
-                  if(isset($data['complete']) && codegenGetType($data['complete']) !== 'boolean'){
-                      $errors['complete'][] = 'use boolean';
-                  }
-          return $errors;
-      }
-  }
-  
-  class CategoryValidator {
-      public function check($data) {
-          $errors = [];
-                  if(isset($data['id']) && codegenGetType($data['id']) !== 'number'){
-                      $errors['id'][] = 'use number';
-                  }
-                  if(isset($data['name']) && codegenGetType($data['name']) !== 'string'){
-                      $errors['name'][] = 'use string';
-                  }
-          return $errors;
-      }
-  }
-  
-  class UserValidator {
-      public function check($data) {
-          $errors = [];
-                  if(isset($data['id']) && codegenGetType($data['id']) !== 'number'){
-                      $errors['id'][] = 'use number';
-                  }
-                  if(isset($data['username']) && codegenGetType($data['username']) !== 'string'){
-                      $errors['username'][] = 'use string';
-                  }
-                  if(isset($data['firstName']) && codegenGetType($data['firstName']) !== 'string'){
-                      $errors['firstName'][] = 'use string';
-                  }
-                  if(isset($data['lastName']) && codegenGetType($data['lastName']) !== 'string'){
-                      $errors['lastName'][] = 'use string';
-                  }
-                  if(isset($data['email']) && codegenGetType($data['email']) !== 'string'){
-                      $errors['email'][] = 'use string';
-                  }
-                  if(isset($data['password']) && codegenGetType($data['password']) !== 'string'){
-                      $errors['password'][] = 'use string';
-                  }
-                  if(isset($data['phone']) && codegenGetType($data['phone']) !== 'string'){
-                      $errors['phone'][] = 'use string';
-                  }
-                  if(isset($data['userStatus']) && codegenGetType($data['userStatus']) !== 'number'){
-                      $errors['userStatus'][] = 'use number';
-                  }
-          return $errors;
-      }
-  }
-  
-  class TagValidator {
-      public function check($data) {
-          $errors = [];
-                  if(isset($data['id']) && codegenGetType($data['id']) !== 'number'){
-                      $errors['id'][] = 'use number';
-                  }
-                  if(isset($data['name']) && codegenGetType($data['name']) !== 'string'){
-                      $errors['name'][] = 'use string';
-                  }
-          return $errors;
-      }
-  }
-  
-  class PetValidator {
-      public function check($data) {
-          $errors = [];
-                  if(isset($data['id']) && codegenGetType($data['id']) !== 'number'){
-                      $errors['id'][] = 'use number';
-                  }
-                  if(isset($data['category'])){
-                      $errors['category']['attrs'] =
-                          DefinitionFactory::factory('Category')->validate($data['category']);
-                  }
-                  if(!isset($data['name'])){
-                      $errors['name'][] = 'required';
-                  }
-                  if(isset($data['name']) && codegenGetType($data['name']) !== 'string'){
-                      $errors['name'][] = 'use string';
-                  }
-                  if(!isset($data['photoUrls'])){
-                      $errors['photoUrls'][] = 'required';
-                  }
-                  if(isset($data['photoUrls']) && codegenGetType($data['photoUrls']) !== 'array'){
-                      $errors['photoUrls'][] = 'use array';
-                  }
-                  if(isset($data['tags']) && codegenGetType($data['tags']) !== 'array'){
-                      $errors['tags'][] = 'use array';
-                  }
-                  if(isset($data['tags'])){
-                      $errors['tags']['attrs'] =
-                      DefinitionFactory::factory('Tag')->validate($data['tags']);
-                  }
-                  if(isset($data['status']) && codegenGetType($data['status']) !== '"available" | "pending" | "sold"'){
-                      $errors['status'][] = 'use "available" | "pending" | "sold"';
-                  }
-          return $errors;
-      }
-  }
-  
-  class ApiResponseValidator {
-      public function check($data) {
-          $errors = [];
-                  if(isset($data['code']) && codegenGetType($data['code']) !== 'number'){
-                      $errors['code'][] = 'use number';
-                  }
-                  if(isset($data['type']) && codegenGetType($data['type']) !== 'string'){
-                      $errors['type'][] = 'use string';
-                  }
-                  if(isset($data['message']) && codegenGetType($data['message']) !== 'string'){
-                      $errors['message'][] = 'use string';
-                  }
-          return $errors;
-      }
-  }
+class CategoryValidator
+{
+    public function check($data)
+    {
+        $errors = [];
+        if (isset($data['id']) && codegenGetType($data['id']) !== 'number') {
+            $errors['id'][] = 'use number';
+        }
+        if (
+            isset($data['name']) &&
+            codegenGetType($data['name']) !== 'string'
+        ) {
+            $errors['name'][] = 'use string';
+        }
+        return $errors;
+    }
+}
+
+class UserValidator
+{
+    public function check($data)
+    {
+        $errors = [];
+        if (isset($data['id']) && codegenGetType($data['id']) !== 'number') {
+            $errors['id'][] = 'use number';
+        }
+        if (
+            isset($data['username']) &&
+            codegenGetType($data['username']) !== 'string'
+        ) {
+            $errors['username'][] = 'use string';
+        }
+        if (
+            isset($data['firstName']) &&
+            codegenGetType($data['firstName']) !== 'string'
+        ) {
+            $errors['firstName'][] = 'use string';
+        }
+        if (
+            isset($data['lastName']) &&
+            codegenGetType($data['lastName']) !== 'string'
+        ) {
+            $errors['lastName'][] = 'use string';
+        }
+        if (
+            isset($data['email']) &&
+            codegenGetType($data['email']) !== 'string'
+        ) {
+            $errors['email'][] = 'use string';
+        }
+        if (
+            isset($data['password']) &&
+            codegenGetType($data['password']) !== 'string'
+        ) {
+            $errors['password'][] = 'use string';
+        }
+        if (
+            isset($data['phone']) &&
+            codegenGetType($data['phone']) !== 'string'
+        ) {
+            $errors['phone'][] = 'use string';
+        }
+        if (
+            isset($data['userStatus']) &&
+            codegenGetType($data['userStatus']) !== 'number'
+        ) {
+            $errors['userStatus'][] = 'use number';
+        }
+        return $errors;
+    }
+}
+
+class TagValidator
+{
+    public function check($data)
+    {
+        $errors = [];
+        if (isset($data['id']) && codegenGetType($data['id']) !== 'number') {
+            $errors['id'][] = 'use number';
+        }
+        if (
+            isset($data['name']) &&
+            codegenGetType($data['name']) !== 'string'
+        ) {
+            $errors['name'][] = 'use string';
+        }
+        return $errors;
+    }
+}
+
+class PetValidator
+{
+    public function check($data)
+    {
+        $errors = [];
+        if (isset($data['id']) && codegenGetType($data['id']) !== 'number') {
+            $errors['id'][] = 'use number';
+        }
+        if (isset($data['category'])) {
+            $errors['category']['attrs'] = DefinitionFactory::factory(
+                'Category'
+            )->validate($data['category']);
+        }
+        if (!isset($data['name'])) {
+            $errors['name'][] = 'required';
+        }
+        if (
+            isset($data['name']) &&
+            codegenGetType($data['name']) !== 'string'
+        ) {
+            $errors['name'][] = 'use string';
+        }
+        if (!isset($data['photoUrls'])) {
+            $errors['photoUrls'][] = 'required';
+        }
+        if (
+            isset($data['photoUrls']) &&
+            codegenGetType($data['photoUrls']) !== 'array'
+        ) {
+            $errors['photoUrls'][] = 'use array';
+        }
+        if (isset($data['tags']) && codegenGetType($data['tags']) !== 'array') {
+            $errors['tags'][] = 'use array';
+        }
+        if (isset($data['tags'])) {
+            $errors['tags']['attrs'] = DefinitionFactory::factory(
+                'Tag'
+            )->validate($data['tags']);
+        }
+        if (
+            isset($data['status']) &&
+            codegenGetType($data['status']) !==
+                '"available" | "pending" | "sold"'
+        ) {
+            $errors['status'][] = 'use "available" | "pending" | "sold"';
+        }
+        return $errors;
+    }
+}
+
+class ApiResponseValidator
+{
+    public function check($data)
+    {
+        $errors = [];
+        if (
+            isset($data['code']) &&
+            codegenGetType($data['code']) !== 'number'
+        ) {
+            $errors['code'][] = 'use number';
+        }
+        if (
+            isset($data['type']) &&
+            codegenGetType($data['type']) !== 'string'
+        ) {
+            $errors['type'][] = 'use string';
+        }
+        if (
+            isset($data['message']) &&
+            codegenGetType($data['message']) !== 'string'
+        ) {
+            $errors['message'][] = 'use string';
+        }
+        return $errors;
+    }
+}
