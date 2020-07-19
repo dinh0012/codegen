@@ -38,7 +38,7 @@
     "js-beautify": "^1.10.2",
     "js-yaml": "^3.13.1",
     "jshint": "^2.10.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mustache": "^3.1.0",
     "update-notifier": "^3.0.1"
   }
