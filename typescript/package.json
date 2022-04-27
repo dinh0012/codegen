@@ -16,7 +16,7 @@
     "@types/mustache": "^0.8.32",
     "@types/node": "^12.12.21",
     "final-fs": "^1.6.1",
-    "grunt": "^1.0.4",
+    "grunt": "^1.5.2",
     "grunt-contrib-jshint": "^2.1.0",
     "grunt-jsonlint": "^2.0.0",
     "grunt-vows": "^0.4.2",
